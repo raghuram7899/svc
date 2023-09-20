@@ -1,0 +1,28 @@
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: demo-replicaset
+  labels: 
+    app: nginx
+    purpose: test
+    release: 1.28
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: webserver
+          image: nginx:1.25
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          env:
+            - name: dev
+              value: learning
